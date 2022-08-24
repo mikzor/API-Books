@@ -1,10 +1,11 @@
-const should = require('chai').should(); 
+//const should = require('chai').should(); 
 const apiResponse = require ('../APIs/random-api');
+const { expect, assert } = require ('chai');
 
 describe('API-Books', async function() {
-    it('Should GET my book', async function() {
-        const getBook = await apiResponse.get();
-
+    it.only('Should GET my book', async function() {
+        const getBook = await apiResponse.requestTheBook();
+        expect(getBook.status).to.equal(200);
         console.log(getBook.data);
     });
 
