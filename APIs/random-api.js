@@ -1,30 +1,44 @@
 const { expect, assert } = require ('chai');
 const Client = require ('../APIs/client-api.js');
-
+const updateTitle = {title: "Easy", 
+                     author: "Peezy"
+                    };
 
 class Random {
-    async createNewpost(){
-        const createPost = await Client.post();
-        return createPost;
+    //POST
+    async createBook(titleName, authorName){
+        const createPost = await Client.post({ title: titleName, author: authorName});
+        expect(createPost.status).to.equal(201);
+
+        return createPost.data;
     }
     //GET
-    async requestTheBook(){
-        const requestBook = await Client.get();
-      //  expect(requestBook.status).to.equal(200);
-      console.log(requestBook);
-        return requestBook;
+    async requestTheBook(bookId){
+        const requestBook = await Client.get(bookId);
+        expect(requestBook.status).to.equal(200);
+
+        return requestBook.data;
     }
 
-    async updateTheBook(){
-        const bookUpdate = await Client.put();
-        assert.equal(bookUpdate.data.title, "Thunder");
-        return bookUpdate;
+        // ALL GET
+        async requestAllTheBooks(){
+            const requestAllBook = await Client.allget();
+           // expect(requestBook.status).to.equal(200);
+    
+           return requestAllBook.data;
+        }
+    //PUT
+    async updateTheBook(bookId){
+        const bookUpdate = await Client.put(bookId, updateTitle);
+        expect(bookUpdate.status).to.equal(200);
+
+        return bookUpdate.data;
     }
 
-    async deleteTheBook(){
-        const deleteBook = await Client.delete(baseUrl + deleteBookItem);
+    async deleteTheBook(bookId){
+        const deleteBook = await Client.delete(bookId);
 
-        return deleteBook;
+        return deleteBook.data.message;
     }
 
 }
