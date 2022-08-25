@@ -22,7 +22,7 @@ describe('API-Books', async function() {
         
     });
 
-    it.only('Should ALL GET a new book', async function() {
+    it('Should ALL GET a new book', async function() {
         const getAllBooks = await booksApi.requestAllTheBooks();
         return getAllBooks;
     
