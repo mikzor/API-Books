@@ -1,6 +1,6 @@
 should = require('chai').should(); 
 const booksApi = require ('../APIs/random-api');
-const { expect, assert } = require ('chai');
+const { expect } = require ('chai');
 const author = 'Grand';
 const title =  'Design';
 
@@ -17,14 +17,20 @@ describe('API-Books', async function() {
         const newBook = await booksApi.createBook(title, author);
         const getBook = await booksApi.requestTheBook(newBook.id);
         newBook.title.should.be.a('string');
-        getBook.author.should.be.a('String');
+        getBook.author.should.be.a('string');
         return newBook;
         
     });
 
-    it('Should ALL GET a new book', async function() {
+    it.only('Should ALL GET a new book', async function() {
         const getAllBooks = await booksApi.requestAllTheBooks();
-        return getAllBooks;
+        for (let i = 0; i < getAllBooks.length; i++) {
+            expect(getAllBooks[i].id).to.be.a('string');
+            console.log(getAllBooks[i].id);
+            
+        }
+
+      //  return getAllBooks;
     
     });
 

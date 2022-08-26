@@ -25,7 +25,7 @@ class Random {
             const requestAllBook = await Client.allget();
            // expect(requestBook.status).to.equal(200);
     
-           return requestAllBook.data;
+           return requestAllBook.data.body;
         }
     //PUT
     async updateTheBook(bookId){
